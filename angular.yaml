@@ -1,0 +1,81 @@
+- hosts: all
+  remote_user: ubuntu
+  become: yes
+
+  vars:
+      repo_path: sanjeevkumarsr/angular2:'${IMAGE_TAG}'
+      dest_path: /home/ubuntu/'${IMAGE_TAG}'
+      
+
+
+  tasks:
+  - name: Install Python 3 pip package
+    apt:
+        name: python3-pip
+        state: present
+  
+  - name: Install Docker
+    apt:
+        name: docker.io
+        state: present
+
+  - name: Start Docker service
+    service:
+        name: docker
+        state: started
+
+  - name: Docker python package
+    pip:
+        name: docker-py
+        state: present
+        
+  - name: Create a directory if it does not exist
+    file:
+          dest: "{{ dest_path }}"
+          state: directory
+
+  - name: copy files
+    copy:
+        src: ./ 
+        dest: "{{ dest_path }}"
+       
+  - name: Add the Node.js repository
+    shell: 'curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash '
+
+  - name: Install Node.js and npm
+    apt:
+        name: nodejs
+        state: present
+
+  - name: Install npm
+    command: npm install
+    args:
+        chdir: "{{ dest_path }}"
+
+  - name: Install gulp
+    npm: 
+        name: gulp
+        state: present
+        global: yes
+    args:
+        chdir: "{{ dest_path }}"
+     
+  - name: Install Angular
+    npm:
+        name: '@angular/cli'
+        global: yes
+        state: present
+        
+  - name: Install Process manager tool
+    npm:
+        name: pm2
+        global: yes
+        state: present
+
+  - name: pm2 command
+    command: pm2 status
+
+  - name: Start service
+    command: pm2 start npm -- /src/index.html --name '{IMAGE_TAG}-service'
+    args:
+      chdir: "{{ dest_path }}"
