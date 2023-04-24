@@ -44,18 +44,10 @@
         state: present
 
   - name: Install npm
-    command: npm install
+    command: npm install -g gulp
     args:
         chdir: "{{ dest_path }}"
-
-  - name: Install gulp
-    npm: 
-        name: gulp
-        state: present
-        global: yes
-    args:
-        chdir: "{{ dest_path }}"
-     
+    
   - name: Install Angular
     npm:
         name: '@angular/cli'
