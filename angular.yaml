@@ -31,7 +31,7 @@
         
   - name: Create a directory if it does not exist
     file:
-          dest: "{{ dest_path }}"
+          dest: "{{ destination_file }}"
           state: directory
 
   - name: copy files
@@ -50,7 +50,7 @@
   - name: Install npm
     command: npm install -g gulp
     args:
-        chdir: "{{ dest_path }}"
+        chdir: "{{ destination_file }}"
     
   - name: Install Angular
     npm:
@@ -70,4 +70,4 @@
   - name: Start service
     command:  pm2 start npm -- start /src/index.html --name "{{IMAGE_TAG}}-Service"
     args:
-      chdir: "{{ dest_path }}"
+      chdir: "{{ destination_file }}"
