@@ -4,7 +4,7 @@
 
   vars:
       repo_path: sanjeevkumarsr/angular2:{{IMAGE_TAG}}
-      dest_path: /home/ubuntu/angularproject
+      dest_path: /home/ubuntu/newangular
       
 
 
