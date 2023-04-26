@@ -3,8 +3,8 @@
   become: yes
 
   vars:
-      source_file: /var/lib/jenkins/workspace/angular\ real\ world
-      destination_file: /home/ubuntu/angularjs
+      source_file: /var/lib/jenkins/workspace/angularproject
+      destination_file: /home/ubuntu/jsrealworld
       
 
 
