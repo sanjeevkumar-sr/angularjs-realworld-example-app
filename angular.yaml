@@ -3,7 +3,7 @@
   become: yes
 
   vars:
-      repo_path: sanjeevkumarsr/angular2:'${IMAGE_TAG}'
+      repo_path: sanjeevkumarsr/angular2:{{IMAGE_TAG}}
       dest_path: /home/ubuntu/angularproject
       
 
@@ -68,6 +68,6 @@
     command: pm2 status
 
   - name: Start service
-    command: pm2 start npm -- /src/index.html --name '{IMAGE_TAG}-service'
+    command: pm2 start npm -- /src/index.html --name '{{IMAGE_TAG}}-service'
     args:
       chdir: "{{ dest_path }}"
