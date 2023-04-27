@@ -61,9 +61,6 @@
         global: yes
         state: present
 
-  - name: pm2 command
-    command: pm2 status
-
   - name: Start service
     command:  pm2 start npm -- start ./src/index.html
     args:
