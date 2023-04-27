@@ -34,12 +34,6 @@
           dest: "{{ destination_file }}"
           state: directory
           
-          
-  - name: copy files
-    copy:
-        src: ./ 
-        dest: "{{ destination_file }}"
-        
   - name: Add the Node.js repository
     shell: 'curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash '
 
