@@ -3,7 +3,7 @@
   become: yes
 
   vars:
-      source_file: /var/lib/jenkins/workspace/angularproject
+      source_file: sanjeevkumarsr/angularworld:{{IMAGE_TAG}}
       destination_file: /home/ubuntu/jsrealworld
       
 
@@ -33,9 +33,13 @@
     file:
           dest: "{{ destination_file }}"
           state: directory
-
- 
-       
+          
+          
+  - name: copy files
+    copy:
+        src: ./ 
+        dest: "{{ dest_path }}"   
+        
   - name: Add the Node.js repository
     shell: 'curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash '
 
