@@ -41,7 +41,7 @@
         dest: "{{ destination_file }}" 
           
   - name: Add the Node.js repository
-    shell: ' curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash '
+    shell: 'curl --silent --location https://rpm.nodesource.com/setup_16.x | bash -' 
 
   - name: Install Node.js and npm
     yum:
