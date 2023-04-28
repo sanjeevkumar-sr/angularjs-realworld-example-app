@@ -4,7 +4,7 @@
 
   vars:
       source_file: sanjeevkumarsr/world:{{IMAGE_TAG}}
-      destination_file: /home/ec2-user/
+      destination_file: /home/ec2-user/jsworld
 
       
 
@@ -41,7 +41,7 @@
         dest: "{{ destination_file }}" 
           
   - name: Add the Node.js repository
-    shell: 'curl --silent --location https://rpm.nodesource.com/setup_16.x | bash -'
+    shell: ' wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash '
 
   - name: Install Node.js and npm
     yum:
