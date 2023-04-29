@@ -3,7 +3,7 @@
   become: yes
 
   vars:
-      source_file: sanjeevkumarsr/world:{{IMAGE_TAG}}
+      source_file: sanjeevkumarsr/worldexample:{{IMAGE_TAG}}
       destination_file: /home/ec2-user/jsworld
 
       
