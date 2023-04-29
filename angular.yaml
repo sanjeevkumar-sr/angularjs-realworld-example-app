@@ -3,7 +3,7 @@
   become: yes
 
   vars:
-      source_file: sanjeevkumarsr/worldexample:{{IMAGE_TAG}}
+      source_file: cd /var/lib/jenkins/workspace/angularexample
       destination_file: /home/ec2-user/jsworld
 
       
