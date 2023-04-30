@@ -4,7 +4,7 @@
   become_user: root
   become: true
   vars:
-    repo_path: sanjeevkumarsr/project:$DOCKER_TAG
+    repo_path: sanjeevkumarsr/worldexample:$DOCKER_TAG
     dest_path: /home/ec2-user/angularjsapp
   tasks:
     - name: Install python pip
@@ -51,10 +51,6 @@
     - name: Install Node packages
       npm:
         path: "{{ dest_path }}"
-    - name: Build the application
-      command: ng build --configuration production
-      args:
-        chdir: "{{ dest_path }}"
     - name: Install PM2
       npm: name=pm2 global=yes state=present
     - name: Get Forever's list of running processes
