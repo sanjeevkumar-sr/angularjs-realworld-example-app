@@ -1,11 +1,11 @@
 ---
-- name: Staging server Deployment
-  hosts: all
+
+- hosts: all
   become_user: root
   become: true
   vars:
-    repo_path: sanjeevkumarsr/project:{{DOCKER_TAG}}
-    dest_path: /home/ec2-user/angularworld
+    repo_path: sanjeevkumarsr/project:$DOCKER_TAG
+    dest_path: /home/ec2-user/angularjsapp
   tasks:
     - name: Install python pip
       yum:
@@ -38,17 +38,24 @@
       shell: 'curl --silent --location https://rpm.nodesource.com/setup_16.x | bash -'
     # If other package are required mention the package name in "name"
     # eg: ngix, curl, wget, apache2, nodejs
-    - name: Install reqired packages
+    - name: Install required packages
       yum:
         name: nodejs
         state: present
-    - name: Install reqired packages
+    - name: Install project dependencies
+      command: npm install
+      args:
+        chdir: "{{ dest_path }}"
+    - name: Install Angular CLI
       command: sudo npm install -g @angular/cli
-    - name: Install Gulp packages
-      command: sudo npm install -g gulp
-    - name: Install reqired packages
-      command: cd "{{ dest_path }}"
-    - name: npm install pm2@latest -g
+    - name: Install Node packages
+      npm:
+        path: "{{ dest_path }}"
+    - name: Build the application
+      command: ng build --configuration production
+      args:
+        chdir: "{{ dest_path }}"
+    - name: Install PM2
       npm: name=pm2 global=yes state=present
     - name: Get Forever's list of running processes
       command: pm2 status
@@ -57,6 +64,6 @@
     - name: Kill pm2 service
       command: pm2 kill
     - name: Start service
-      command: pm2 start npm -- start ./src --name "{{DOCKER_TAG}}-Service"
+      command: pm2 start npm -- start ./src/index.html --name "{DOCKER_TAG}-Service"
       args:
         chdir: "{{ dest_path }}"
