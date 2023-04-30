@@ -60,6 +60,6 @@
     - name: Kill pm2 service
       command: pm2 kill
     - name: Start service
-      command: pm2 start angularjsapp/src/index.html --name "{DOCKER_TAG}-Service"
+      command: pm2 start npm--start angularjsapp/src/index.html --name "{DOCKER_TAG}-Service"
       args:
         chdir: "{{ dest_path }}"
