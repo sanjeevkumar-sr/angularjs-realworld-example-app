@@ -6,7 +6,7 @@
   
   vars:
     repo_path: sanjeevkumarsr/worldexample:$DOCKER_TAG
-    dest_path: /home/ec2-user/angularjsapp
+    dest_path: /home/ec2-user/worldexample
     
     
   tasks:
@@ -74,6 +74,6 @@
       
 
     - name: Start service
-      command: pm2 start npm -- start angularjsapp/src/index.html --name "{DOCKER_TAG}-Service"
+      command: pm2 start npm -- start ./src/index.html --name "{DOCKER_TAG}-Service"
       args:
         chdir: "{{ dest_path }}"
