@@ -84,7 +84,6 @@
       register: pm2_status
 
     - name: Start PM2 process with npm
-      become_user: root
-      shell:  pm2 start ./src/index.html --name conduit-angularjs
+      shell: pm2 start npm -- start ./src/index.html --name conduit-angularjs
       args:
         chdir: "{{ dest_path }}"
