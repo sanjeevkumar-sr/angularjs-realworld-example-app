@@ -85,6 +85,6 @@
 
     - name: Start PM2 process with npm
       become_user: root
-      shell: pm2 start npm -- start worldexample/src/js/app.js  --name '{IMAGE_TAG}-service'
+      shell: pm2 start npm -- start ./src --name '{IMAGE_TAG}-service'
       args:
         chdir: "{{ dest_path }}"
