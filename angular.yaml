@@ -5,7 +5,7 @@
   become: true
   
   vars:
-    repo_path: sanjeevkumarsr/worldexample:$DOCKER_TAG
+    repo_path: sanjeevkumarsr/worldexample:$IMAGE_TAG
     dest_path: /home/ec2-user/worldexample
     
     
@@ -55,6 +55,10 @@
       args:
         chdir: "{{ dest_path }}"
         
+        
+    - name: Install gulp using npm
+      command: npm install -g gulp
+        
     - name: Install Angular
       npm:
         name: '@angular/cli'
@@ -74,6 +78,6 @@
       
 
     - name: Start service
-      command: pm2 start npm -- start ./src/index.html --name "{DOCKER_TAG}-Service"
+      command: pm2 start npm -- start ./src/index.html --name "{IMAGE_TAG}-Service"
       args:
         chdir: "{{ dest_path }}"
