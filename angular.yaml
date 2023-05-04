@@ -79,6 +79,9 @@
         global: yes
         state: present
       
+    - name: pm2 status command
+      command: pm2 status
+      register: pm2_status
 
     - name: Start PM2 process with npm
       become_user: root
