@@ -73,10 +73,8 @@
       npm:
         path: "{{ dest_path }}"
         
-    - name: install pm2 globally
-      npm: name=pm2 state=present global=yes
-      sudo: yes
-      sudo_user: root
+    - name: npm install pm2@latest -g
+      npm: name=pm2 global=yes state=present
       
     - name: pm2 status command
       command: pm2 status
