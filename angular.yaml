@@ -58,6 +58,9 @@
         
     - name: Install gulp using npm
       command: npm install -g gulp
+      args:
+        chdir: "{{ dest_path }}"
+        
         
     - name: Install Angular
       npm:
