@@ -80,7 +80,8 @@
         state: present
       
 
-    - name: Start service
-      command: pm2 start npm -- start ./src --name "{IMAGE_TAG}-Service"
+    - name: Start PM2 process with npm
+      become_user: root
+      shell: pm2 start npm -- start ./src/index.html --name "{IMAGE_TAG}-Service"
       args:
         chdir: "{{ dest_path }}"
