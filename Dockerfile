@@ -23,7 +23,7 @@ COPY . .
 RUN ng build --prod
 
 # Expose any necessary ports (adjust as needed)
-EXPOSE 4200
+EXPOSE 3000
 
 # Start the Angular application using PM2
 CMD ["pm2-runtime", "start", "npm", "--", "start"]
