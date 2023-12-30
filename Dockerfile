@@ -13,14 +13,17 @@ RUN npm install -g @angular/cli
 # Install project dependencies
 RUN npm install
 
-# Copy the rest of the application code to the working directory
-COPY . .
-
 # Install PM2 globally
 RUN npm install -g pm2
 
+# Copy the rest of the application code to the working directory
+COPY . .
+
+# Build the Angular app for production
+RUN ng build --prod
+
 # Expose any necessary ports (adjust as needed)
-EXPOSE 3000
+EXPOSE 4200
 
 # Start the Angular application using PM2
-CMD ["pm2", "start", "ng", "--", "serve", "--host", "0.0.0.0", "--port", "3000"]
+CMD ["pm2-runtime", "start", "npm", "--", "start"]
