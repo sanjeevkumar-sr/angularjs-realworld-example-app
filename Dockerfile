@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install -g @angular/cli
 
 # Install project dependencies
-RUN npm install
+RUN npm install -g gulp
 
 # Install PM2 globally
 RUN npm install -g pm2
@@ -19,11 +19,8 @@ RUN npm install -g pm2
 # Copy the rest of the application code to the working directory
 COPY . .
 
-# Build the Angular app for production
-RUN ng build --prod
-
 # Expose any necessary ports (adjust as needed)
 EXPOSE 3000
 
 # Start the Angular application using PM2
-CMD ["pm2-runtime", "start", "npm", "--", "start"]
+CMD ["pm2-runtime", "start", "npm", "--", "start", "angularjs-realworld-example-app/src/index.html"]
